@@ -1,0 +1,14 @@
+#compdef asciizer
+
+# Zsh completion script for asciizer
+# Install: cp _asciizer ~/.oh-my-zsh/custom/completions/
+
+_arguments -s \
+  '(-h -help)'{-h,-help}'[Show help message]' \
+  '-w[Output width in characters (0 = no resize)]:width:' \
+  '-o[Output file path]:output file:_files' \
+  '-stdout[Print to stdout instead of file]' \
+  '-invert[Reverse brightness mapping]' \
+  '-color[ANSI 256-color output]' \
+  '-full-ramp[Use 70-char gradient instead of 10-char]' \
+  '*:image file:_files -g "*.(jpg|jpeg|png|gif)"'

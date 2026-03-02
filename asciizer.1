@@ -1,0 +1,71 @@
+.TH ASCIIZER 1 "March 2026" "version 1.0.0" "User Commands"
+.SH NAME
+asciizer \- convert images to ASCII art
+.SH SYNOPSIS
+.B asciizer
+[\fIOPTIONS\fR]
+.I image_file
+.SH DESCRIPTION
+.B asciizer
+converts images to ASCII art. It supports JPEG, PNG, and GIF formats with
+automatic format detection. Output can be written to a file or printed to
+stdout, optionally with ANSI 256-color escape sequences.
+.PP
+Images are resized to fit the target width (default 80 characters) with
+aspect ratio correction for terminal display. Character selection is based
+on pixel luminance mapped to a configurable character ramp.
+.SH OPTIONS
+.TP
+.BR \-w " \fIN\fR"
+Output width in characters. Default is 80. Set to 0 to disable resizing
+and use the original image dimensions.
+.TP
+.BR \-o " \fIPATH\fR"
+Output file path. Default is the input filename with its extension
+replaced by \fB.asc\fR.
+.TP
+.BR \-stdout
+Print ASCII art to stdout instead of writing to a file.
+.TP
+.BR \-invert
+Reverse the brightness mapping so that dark pixels use dense characters
+and bright pixels use sparse characters.
+.TP
+.BR \-color
+Enable ANSI 256-color output using the 6x6x6 color cube. Character
+selection is still based on grayscale luminance for structural detail.
+.TP
+.BR \-full\-ramp
+Use a 70-character gradient ramp instead of the default 10-character
+short ramp. Provides finer tonal detail at the cost of less obvious
+character shapes.
+.SH EXAMPLES
+.TP
+.B asciizer photo.jpg
+Convert photo.jpg to ASCII art and save as photo.asc.
+.TP
+.B asciizer \-stdout photo.png
+Print ASCII art to the terminal.
+.TP
+.B asciizer \-stdout \-color \-w 120 photo.png
+Print 120-column color ASCII art to the terminal.
+.TP
+.B asciizer \-stdout \-invert \-full\-ramp photo.gif
+Print inverted ASCII art using the detailed 70-character ramp.
+.TP
+.B asciizer \-o art.txt \-w 0 photo.jpg
+Save at original resolution to art.txt.
+.SH SUPPORTED FORMATS
+JPEG, PNG, and GIF images are supported. Format is detected automatically
+from file contents, not the file extension.
+.SH EXIT STATUS
+.TP
+.B 0
+Success.
+.TP
+.B 1
+An error occurred (invalid arguments, unreadable file, unsupported format).
+.SH AUTHOR
+Mark Sjurseth
+.SH COPYRIGHT
+Copyright (c) 2026. MIT License.
