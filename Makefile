@@ -12,16 +12,18 @@ test:
 
 release: clean test
 	@mkdir -p dist
+	cp asciizer.1 dist/
 	GOOS=linux   GOARCH=amd64 go build $(LDFLAGS) -o dist/asciizer . && \
-		tar -czf dist/asciizer-$(VERSION)-linux-amd64.tar.gz -C dist asciizer && rm dist/asciizer
+		tar -czf dist/asciizer-$(VERSION)-linux-amd64.tar.gz -C dist asciizer asciizer.1 && rm dist/asciizer
 	GOOS=linux   GOARCH=arm64 go build $(LDFLAGS) -o dist/asciizer . && \
-		tar -czf dist/asciizer-$(VERSION)-linux-arm64.tar.gz -C dist asciizer && rm dist/asciizer
+		tar -czf dist/asciizer-$(VERSION)-linux-arm64.tar.gz -C dist asciizer asciizer.1 && rm dist/asciizer
 	GOOS=darwin  GOARCH=amd64 go build $(LDFLAGS) -o dist/asciizer . && \
-		tar -czf dist/asciizer-$(VERSION)-darwin-amd64.tar.gz -C dist asciizer && rm dist/asciizer
+		tar -czf dist/asciizer-$(VERSION)-darwin-amd64.tar.gz -C dist asciizer asciizer.1 && rm dist/asciizer
 	GOOS=darwin  GOARCH=arm64 go build $(LDFLAGS) -o dist/asciizer . && \
-		tar -czf dist/asciizer-$(VERSION)-darwin-arm64.tar.gz -C dist asciizer && rm dist/asciizer
+		tar -czf dist/asciizer-$(VERSION)-darwin-arm64.tar.gz -C dist asciizer asciizer.1 && rm dist/asciizer
 	GOOS=windows GOARCH=amd64 go build $(LDFLAGS) -o dist/asciizer.exe . && \
-		cd dist && zip asciizer-$(VERSION)-windows-amd64.zip asciizer.exe && rm asciizer.exe
+		cd dist && zip asciizer-$(VERSION)-windows-amd64.zip asciizer.exe asciizer.1 && rm asciizer.exe
+	rm dist/asciizer.1
 
 clean:
 	rm -rf dist/

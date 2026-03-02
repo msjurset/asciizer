@@ -12,4 +12,5 @@ _arguments -s \
   '-color[ANSI 256-color output]' \
   '-full-ramp[Use 70-char gradient instead of 10-char]' \
   '-version[Print version and exit]' \
+  '-completion[Print shell completion script]:shell:(zsh bash)' \
   '*:image file:_files -g "*.(jpg|jpeg|png|gif)"'

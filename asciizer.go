@@ -39,6 +39,7 @@ func main() {
 	colorFlag := flag.Bool("color", false, "ANSI 256-color output")
 	fullRamp := flag.Bool("full-ramp", false, "use 70-char gradient instead of 10-char")
 	showVersion := flag.Bool("version", false, "print version and exit")
+	completion := flag.String("completion", "", "print shell completion script (zsh, bash)")
 
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "asciizer %s\n\nUsage: asciizer [flags] <image_file>\n\nFlags:\n", version)
@@ -48,6 +49,19 @@ func main() {
 
 	if *showVersion {
 		fmt.Printf("asciizer %s\n", version)
+		return
+	}
+
+	if *completion != "" {
+		switch *completion {
+		case "zsh":
+			fmt.Print(zshCompletion)
+		case "bash":
+			fmt.Print(bashCompletion)
+		default:
+			fmt.Fprintf(os.Stderr, "unsupported shell: %s (supported: zsh, bash)\n", *completion)
+			os.Exit(1)
+		}
 		return
 	}
 
