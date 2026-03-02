@@ -19,6 +19,8 @@ const (
 	rampShort    = "@%#*+=-:. "
 )
 
+var version = "dev"
+
 type options struct {
 	input    string
 	output   string
@@ -36,12 +38,18 @@ func main() {
 	invert := flag.Bool("invert", false, "reverse brightness mapping")
 	colorFlag := flag.Bool("color", false, "ANSI 256-color output")
 	fullRamp := flag.Bool("full-ramp", false, "use 70-char gradient instead of 10-char")
+	showVersion := flag.Bool("version", false, "print version and exit")
 
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage: asciizer [flags] <image_file>\n\nFlags:\n")
+		fmt.Fprintf(os.Stderr, "asciizer %s\n\nUsage: asciizer [flags] <image_file>\n\nFlags:\n", version)
 		flag.PrintDefaults()
 	}
 	flag.Parse()
+
+	if *showVersion {
+		fmt.Printf("asciizer %s\n", version)
+		return
+	}
 
 	if flag.NArg() < 1 {
 		flag.Usage()

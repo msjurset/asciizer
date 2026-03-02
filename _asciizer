@@ -11,4 +11,5 @@ _arguments -s \
   '-invert[Reverse brightness mapping]' \
   '-color[ANSI 256-color output]' \
   '-full-ramp[Use 70-char gradient instead of 10-char]' \
+  '-version[Print version and exit]' \
   '*:image file:_files -g "*.(jpg|jpeg|png|gif)"'
